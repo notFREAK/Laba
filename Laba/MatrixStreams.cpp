@@ -1,32 +1,5 @@
 #include "Header.h"
 
-ostream& operator<<(ostream& os, Matrix& A)
-{
-	if (A.order == 0) {
-		throw MyException("Operation with empty matrix");
-	}
-	try {
-		if (!os.good())
-			throw MyException("I/O failure");
-		os << A.getOrder() << endl;
-		for (int i = 0; i < A.getOrder(); i++)
-		{
-			for (int j = 0; j < A.getOrder(); j++)
-			{
-				os << A.getMatrix(i, j) << '\t';
-			}
-			os << endl;
-		}
-		return os;
-	}
-	catch (const exception& e) {
-		throw MyException(e.what());
-	}
-	catch (...) {
-		throw MyException("out of memory");
-	}
-}
-
 ostream& operator<<(ostream& os, RectangMatrix& A)
 {
 	if (A.order == 0 || A.length == 0) {
@@ -54,11 +27,35 @@ ostream& operator<<(ostream& os, RectangMatrix& A)
 	}
 }
 
-istream& operator>>(istream& is, Matrix& A)
+ostream& operator<<(ostream& os, Matrix& A)
 {
 	if (A.order == 0) {
 		throw MyException("Operation with empty matrix");
 	}
+	try {
+		if (!os.good())
+			throw MyException("I/O failure");
+		os << A.getOrder() << endl;
+		for (int i = 0; i < A.getOrder(); i++)
+		{
+			for (int j = 0; j < A.getOrder(); j++)
+			{
+				os << A.getMatrix(i, j) << '\t';
+			}
+			os << endl;
+		}
+		return os;
+	}
+	catch (const exception& e) {
+		throw MyException(e.what());
+	}
+	catch (...) {
+		throw MyException("out of memory");
+	}
+}
+
+istream& operator>>(istream& is, Matrix& A)
+{
 	try {
 		if (!is.good())
 			throw MyException("I/O failure");

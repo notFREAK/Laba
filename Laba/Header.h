@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include <ctime>
 
 using namespace std;
 
@@ -23,6 +24,7 @@ public:
 	virtual void Transposition();
 	virtual void Sum(const Matrix &B);
 	Matrix operator+(const Matrix &B);
+	friend bool operator<(const Matrix& A, const Matrix& B);
 	friend Matrix operator-(const Matrix& A, const Matrix& B);
 	friend Matrix& operator--(Matrix& A);
 	friend Matrix operator--(Matrix& A, int);

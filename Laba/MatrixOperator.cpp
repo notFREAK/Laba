@@ -45,6 +45,11 @@ Matrix::operator int** ()
 	}
 }
 
+bool operator<(const Matrix& A, const Matrix& B)
+{
+	return (A.order < B.order);
+}
+
 Matrix operator-(const Matrix& A, const Matrix& B)
 {
 	if (B.order == A.order)
@@ -70,6 +75,7 @@ Matrix operator-(const Matrix& A, const Matrix& B)
 		throw MyException("out of memory");
 	}
 }
+
 
 Matrix& operator--(Matrix& A)
 {

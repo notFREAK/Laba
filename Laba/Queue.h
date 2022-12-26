@@ -249,10 +249,10 @@ void Queue<Matrix>::Print()
     try {
         Node<Matrix>* temp = front;
         while (temp != rear) {
-            cout << *(temp->data) << " ";
+            temp->data->Print();
             temp = temp->next;
         }
-        cout << *(temp->data) << endl;
+        temp->data->Print();
     }
     catch (MyException& e) {
         throw e;
