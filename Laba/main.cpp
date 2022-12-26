@@ -49,6 +49,10 @@ void lab3() {
 	B.read(&bin);
 	bin.close();
 	cout << endl << B << endl;
+	for (int i = 0; i < 6; i++)
+	{
+		delete b[i];
+	}
 }
 
 void lab4() {
@@ -83,6 +87,10 @@ void lab4() {
 	B.Print();
 	main = &C;
 	C.Print();
+	for (int i = 0; i < 6; i++)
+	{
+		delete b[i];
+	}
 }
 
 void lab5() {
@@ -115,6 +123,10 @@ void lab5() {
 	Q.insertFront(B);
 	Q.insertFront(C);
 	Q.Print();
+	for (int i = 0; i < 6; i++)
+	{
+		delete b[i];
+	}
 }
 
 void lab6() {
@@ -147,6 +159,10 @@ void lab6() {
 	}
 	catch (MyException& e) {
 		cout << e.what() << endl;
+	}
+	for (int i = 0; i < 6; i++)
+	{
+		delete b[i];
 	}
 }
 
@@ -193,24 +209,17 @@ void lab7() {
 
 
 void lab8() {
-	int** b = new int* [6];
-	for (int i = 0; i < 6; i++)
-	{
-		b[i] = new int[6];
-		for (int j = 0; j < 6; j++)
-		{
-			b[i][j] = 1 + i * 6 + j;
-		}
-	}
 	srand(time(0));
-	int a = rand()%10;
-	Matrix A(a);
 	stack <int> sint;
 	stack <class Matrix> smat;
 	multiset <int> msint;
 	multiset <class Matrix> msmat;
 	int sintSr = 0, smatSr = 0, msintSr = 0, msmatSr = 0;
 	for (int i = 0; i < 100; i++) {
+
+		int a = rand() % 10;
+		Matrix A(a);
+
 		auto start = chrono::high_resolution_clock::now();
 		sint.push(a);
 		auto stop = chrono::high_resolution_clock::now();
@@ -241,35 +250,41 @@ void lab8() {
 	}
 	cout << "Stack\tInt\tMatrix\tMS\tInt\tMatrix\n";
 	cout << "Insert:\t" << sintSr / 100 << '\t' << smatSr / 100 << "\t\t" << msintSr / 100 << '\t' << msmatSr / 100 << endl;
+	for (int i = 99; i >= 0; i--) {
 
+		int a = rand() % 10;
+		Matrix A(a);
+		int eint = sint.top();
+		Matrix emat = smat.top();
+		auto start = chrono::high_resolution_clock::now();
+		sint.pop();
+		auto stop = chrono::high_resolution_clock::now();
+		auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+		//cout << duration.count() << '\t';
+		sintSr += duration.count();
 
-	auto start = chrono::high_resolution_clock::now();
-	sint.push(a);
-	auto stop = chrono::high_resolution_clock::now();
-	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
-	cout << duration.count() << '\t';
-	sintSr += duration.count();
+		start = chrono::high_resolution_clock::now();
+		smat.pop();
+		stop = chrono::high_resolution_clock::now();
+		duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+		//cout << duration.count() << '\t';
+		smatSr += duration.count();
 
-	start = chrono::high_resolution_clock::now();
-	smat.push(A);
-	stop = chrono::high_resolution_clock::now();
-	duration = chrono::duration_cast<chrono::microseconds>(stop - start);
-	cout << duration.count() << '\t';
-	smatSr += duration.count();
+		start = chrono::high_resolution_clock::now();
+		msint.erase(eint);
+		stop = chrono::high_resolution_clock::now();
+		duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+		//cout << duration.count() << '\t';
+		msintSr += duration.count();
 
-	start = chrono::high_resolution_clock::now();
-	msint.insert(a);
-	stop = chrono::high_resolution_clock::now();
-	duration = chrono::duration_cast<chrono::microseconds>(stop - start);
-	cout << duration.count() << '\t';
-	msintSr += duration.count();
-
-	start = chrono::high_resolution_clock::now();
-	msmat.insert(A);
-	stop = chrono::high_resolution_clock::now();
-	duration = chrono::duration_cast<chrono::microseconds>(stop - start);
-	cout << duration.count() << endl;
-	msmatSr += duration.count();
+		start = chrono::high_resolution_clock::now();
+		msmat.erase(emat);
+		stop = chrono::high_resolution_clock::now();
+		duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+		//cout << duration.count() << endl;
+		msmatSr += duration.count();
+	}
+	cout << "Delete:\t" << sintSr / 100 << '\t' << smatSr / 100 << "\t\t" << msintSr / 100 << '\t' << msmatSr / 100 << endl;
 }
 
 
