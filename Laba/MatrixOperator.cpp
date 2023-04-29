@@ -5,7 +5,7 @@ Matrix Matrix::operator+(const Matrix& B)
 	if (order == 0) {
 		throw MyException("Operation with empty matrix");
 	}
-	if (B.order == order)
+	if (B.order != order)
 	{
 		throw MyException("matrix with different sizes");
 	}
@@ -52,7 +52,7 @@ bool operator<(const Matrix& A, const Matrix& B)
 
 Matrix operator-(const Matrix& A, const Matrix& B)
 {
-	if (B.order == A.order)
+	if (B.order != A.order)
 	{
 		throw MyException("matrix with different sizes");
 	}

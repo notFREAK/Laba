@@ -4,6 +4,49 @@
 #include <stack>
 #include <set>
 
+void lab2() {
+	int** b = new int* [6];
+	for (int i = 0; i < 6; i++)
+	{
+		b[i] = new int[6];
+		for (int j = 0; j < 6; j++)
+		{
+			b[i][j] = 1 + i * 6 + j;
+		}
+	}
+	Matrix A(6, b);
+	int** c = new int* [6];
+	for (int i = 0; i < 6; i++)
+	{
+		c[i] = new int[6];
+		for (int j = 0; j < 6; j++)
+		{
+			c[i][j] = 2 + i * 5 + j;
+		}
+	}
+	Matrix B(6, c);
+	A.Print();
+	B.Print();
+	if (A < B) {
+		(A + B).Print();
+	}
+	else {
+		(A + B).Print();
+	}
+	(A - B).Print();
+	A++.Print();
+	A.Print();
+	(++A).Print();
+	for (int i = 0; i < 6; i++)
+	{
+		delete b[i];
+		delete c[i];
+	}
+	delete b;
+	delete c;
+}
+
+
 void lab3() {
 	int** b = new int* [6];
 	for (int i = 0; i < 6; i++)
@@ -53,6 +96,7 @@ void lab3() {
 	{
 		delete b[i];
 	}
+	delete b;
 }
 
 void lab4() {
@@ -91,6 +135,7 @@ void lab4() {
 	{
 		delete b[i];
 	}
+	delete b;
 }
 
 void lab5() {
@@ -127,6 +172,7 @@ void lab5() {
 	{
 		delete b[i];
 	}
+	delete b;
 }
 
 void lab6() {
@@ -164,6 +210,7 @@ void lab6() {
 	{
 		delete b[i];
 	}
+	delete b;
 }
 
 void lab7() {
@@ -289,6 +336,6 @@ void lab8() {
 
 
 int main() {
-	lab8();
+	lab4();
 	return 0;
 }
